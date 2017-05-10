@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by bgabor91 (http://jsbin.com/lavutu/4/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="jQuery - Projekt - tab panel - callback functions">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+  <style id="jsbin-css">
+body {
+    background:olive ;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: darkred ;
+}
+
+.tab-panels ul {
+    margin: 0;
+    padding: 0;
+}
+
+.tab-panels ul li {
+    list-style-type: none;
+    display: inline-block;
+    background: azure;
+    margin: 0;
+    padding: 3px 10px;
+    border-radius: 5px 5px 5px 5px;
+    color: black ;
+    font-weight: 200;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.tab-panels ul li:hover {
+    background: lightblue;
+}
+
+.tab-panels ul li.active {
+    background: lightgreen;
+}
+
+.tab-panels .panel {
+    display:none;
+    background: beige;
+    padding: 30px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.tab-panels .panel.active {
+    display:block;
+}
+</style>
+</head>
+<body>
+<div class="tab-panels">
+            <ul class="tabs">
+                <li rel="panel1" class="active">Blog</li>
+                <li rel="panel2">Articles</li>
+                <li rel="panel3">Gallery</li>
+                <li rel="panel4">Profile</li>
+            </ul>
+
+            <div id="panel1" class="panel active">
+              
+              <h4> 2017 Cycle 3 – Week 2 Day 4</h4>
+
+              <p>Miss the Cycle 3 Podcast? Check it out <a href="#"> HERE</a></p>
+
+              <p>1. Warm-up<br/>
+              Floss Hips<br/>
+              THEN<br/>  3 Steady Rounds:<br/>  :30 Squat Hold<br/>
+              15 Box Jumps<br/>
+               <br/>
+              2. Strength <br/> Find a new 5RM Back Squat</p>
+              <a href="#"> See more </a>
+            </div>
+            
+            <div id="panel2" class="panel">
+              <h4>Case Study – Lifting by Numbers Part 1 “The Back Squat”</h4>
+              <p>November 2, 2016 By Ted</p>
+              <p>Ever wonder why some athletes are regarded as Squatters OR Pullers? 
+                Why can some Overhead Press the house and others feel totally stuck? 
+                Why do some enjoy steady Bench Press progress while others have been 
+                at the same max for years? Well, to pretend I have all the answers
+                would just be that, pretending.… 
+              </p>
+              <a href="#">VIEW POST...</a> 
+            </div>
+  
+            <div id="panel3" class="panel">
+                <img src="http://i.imgur.com/HYkdBOO.jpg" style="width:50%">
+              <br>
+              <img src="http://i.imgur.com/3dRTPtx.jpg" style="width:50%">
+              <br>
+            </div>
+           
+            <div id="panel4" class="panel">
+              <a href="#"> Preferences </a> <br/>
+              <br>
+              <a href="#"> Edit profile </a><br/>
+              <br>
+              <a href="#"> Subscription </a><br/>
+              <br>
+              <a href="#"> Live Q & A </a><br/>
+              <br>
+              <a href="#"> <b>Log out</b> </a>
+            </div>
+        </div>
+
+
+
+<script id="jsbin-javascript">
+$(function() {
+
+    $('.tab-panels .tabs li').on('click', function() {
+
+        var $panel = $(this).closest('.tab-panels');
+
+        $panel.find('.tabs li.active').removeClass('active');
+        $(this).addClass('active');
+
+        //figure out which panel to show 
+        var panelToShow = $(this).attr('rel');
+
+        //rejtsd el az aktuális panelt
+        $panel.find('.panel.active').slideUp(300, showNextPanel);
+
+        //mutasd meg a következő panelt
+        function showNextPanel() {
+            $(this).removeClass('active');
+
+            $('#'+panelToShow).slideDown(300, function() {
+                $(this).addClass('active');
+            });
+        }
+    });
+
+
+});
+</script>
+</body>
+</html>
